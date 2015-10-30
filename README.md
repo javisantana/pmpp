@@ -4,6 +4,9 @@
 
 PMPP is an extension that provides a means of manually dividing one large query into several smaller ones that return the same shape of result set, allowing for additional query layers on the combined set. This is accomplished through use of polymorphic functions performing asynchronous dblink commands and queue management.
 
+## USAGE
+For function documentation and examples, see the [pmpp.md file](doc/pmpp.md).
+
 ## INSTALLATION
 
 Requirements: PostgreSQL 9.4 or greater, [dblink](http://www.postgresql.org/docs/current/static/dblink.html) extension installed.
@@ -48,6 +51,3 @@ Run "make install" same as above to put the script files and libraries in place.
 ```sql
 ALTER EXTENSION pmpp UPDATE TO '<latest version>';
 ```
-
-## USAGE
-For function documentation and examples, see the [pmpp.md file](doc/pmpp.md).
