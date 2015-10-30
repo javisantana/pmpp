@@ -297,6 +297,41 @@ ORDER BY 1;
 
 This example has the user connecting to the same database as a local superuser (normally not a good idea) and creating an index on every column in the table. The database connected to must also have PMPP installed.
 
+``````````````````HA
+### broadcast()
+
+Given a single connection string, execute a series of statements (ones that don't return sets) in parallel.
+
+```sql
+function broadcast(
+            row_type anytype,
+            connections text[],
+            query text) returns setof anyelement
+```
+
+Run the query on every connection in the connections list.
+
+#### Example:
+
+```
+CREATE TEMPORARY TABLE x( y integer );
+CREATE TABLE
+SELECT  *
+FROM pmpp.broadcast(null::x,
+                    array['connection_1','connection_2'],
+                    'select 1');
+
+`````````````HA
+                command                 | result
+----------------------------------------+--------
+ create index on parallel_index_test(b) | OK
+ create index on parallel_index_test(c) | OK
+ create index on parallel_index_test(d) | OK
+(3 rows)
+```
+
+``````````````````HA
+
 
 ### Other functions
 

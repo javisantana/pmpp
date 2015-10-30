@@ -480,10 +480,27 @@ is E'Convenience routine for executing non-SELECT statements in parallel.\n'
     '                                    WHERE table_name = ''''my_table_name'''' and table_schema = ''my_schema''))';
 
 
+create function broadcast(  row_type anyelement,
+                            connections text[],
+                            query text) returns setof anyelement
+language sql
+security definer
+set search_path from current as $$
+select  distribute(row_type,
+                    array(  select  row(c.conn, array[query], null, 1, null)::query_manifest
+                            from    unnest(connections) c(conn)));
+$$;
+
+comment on function broadcast(anyelement,text[],text)
+is E'Execute a single SQL query across a list of connections\n'
+    'Example:\n'
+    'CREATE TEMPORARY TABLE row_counts( rowcount bigint );\n'
+    'SELECT *\n'
+    'FROM pmpp.broadcast(null::row_counts,\n'
+    '                    array( select srvname from pg_foreign_server ),\n'
+    '                    ''selct count(*) from pg_class'' );';
+
 grant usage on schema @extschema@ to pmpp;
 grant execute on all functions in schema @extschema@ to pmpp;
 
-
-
- 
 

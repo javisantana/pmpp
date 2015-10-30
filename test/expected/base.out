@@ -179,7 +179,8 @@ from    unnest(:'json_str_1'::jsonb::pmpp.query_manifest[]) t;
 
 create temporary table x(y integer);
 select *
-from    pmpp.distribute(null::x,:'loopback_su_conn_str',array['select 1','select 2','select 3']);
+from    pmpp.distribute(null::x,:'loopback_su_conn_str',array['select 1','select 2','select 3'])
+order by y;
  y 
 ---
  1
@@ -268,6 +269,14 @@ from unnest(dblink_test_schema.dblink_get_connections()) as c;
  c 
 ---
 (0 rows)
+
+select *
+from pmpp.broadcast(null::x, array[ :'loopback_su_conn_str' , :'pmpp_localhost_server' ], 'select 1');
+ y 
+---
+ 1
+ 1
+(2 rows)
 
 select *
 from    pmpp.distribute(null::x, :'json_str_div_zero'::jsonb);
