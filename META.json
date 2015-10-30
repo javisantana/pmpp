@@ -2,7 +2,7 @@
     "name": "pmpp",
     "abstract": "Poor Man's Parallel Processing",
     "description": "Leverage dblink() in asynchronous mode to run result-set-similar queries against one or more databases and return the results as a single result set",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "maintainer": [ "Corey Huinker <corey.huinker@moat.com>" ],
     "license": "postgresql",
     "generated_by": "Corey Huinker",
@@ -11,10 +11,10 @@
             "abstract": "A short description",
             "file": "sql/pmpp.sql",
             "docfile": "doc/pmpp.md",
-            "version": "0.0.1"
+            "version": "1.0.0"
         }
     },
-    "release_status": "unstable",
+    "release_status": "stable",
     "prereqs": {
         "runtime": {
             "requires": {
