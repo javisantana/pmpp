@@ -1,5 +1,5 @@
 # pmpp extension
-default_version = '1.0.1'
+default_version = '1.0.3'
 comment = 'Extension for parallel metaquerying'
 requires = dblink
 relocatable = false
