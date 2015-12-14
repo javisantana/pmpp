@@ -12,7 +12,7 @@ begin
     select uname into l_uname from uname_command_output;
     if l_uname = 'Linux' then
         copy cpu_command_output from program 'nproc';
-    elsif l_name = 'Darwin' then
+    elsif l_uname = 'Darwin' then
         copy cpu_command_output from program 'sysctl hw.ncpu | awk ''{print $2}''';
     else
         raise exception 'Unkown uname result: %', l_uname;
